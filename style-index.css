@@ -2,6 +2,7 @@
     border: 2px solid red;
 } */
 
+/* Clase para crear el fondo de pantalla */
 body::before{
     content: "";
     position: fixed;
@@ -17,6 +18,8 @@ body::before{
 
 }
 
+/* Se divide la pantalla en cuadros de 4 filas por 6 columnas.
+*/
 .contenedor{
     margin-left: 0%;
     margin-top: 0%;
@@ -25,6 +28,9 @@ body::before{
     grid-template-rows: repeat(4, 1fr);
 }
 
+/* este es el id de la seccion de la imagen
+Se selecciona la ubicación de  del logo y el nombre entre
+las columnas 1 y 4 y las filas 1 y 5 */
 #logo-nombre{
     grid-column: 1/4;
     grid-row: 1/5;
@@ -33,11 +39,14 @@ body::before{
     padding-right: 40px;
 }
 
+/* Clase para el tamaño de la imagen */
 .img-logo-size{
     height: 450px;
     width: 350px;
 }
 
+/* se ubica el formulario de ingreso y los botones entre las columnas
+4 y 7 y las filas 1 y 5 */
 #form-ingreso{
     grid-column: 4/7;
     grid-row: 1/5;
@@ -45,17 +54,21 @@ body::before{
     justify-self: center;
 }
 
+/* Se centran los cuadros de texto y el logo
+entre el espacio que los contiene */
 .items-logo-center{
     text-align: center;
     font-size: 1.5rem;
     padding: 0px;
 }
 
+/* Modifica el tamaño de las imagenes que estan en los botones de acceso */
 .img-buttons-size{
     max-width: 32px;
     max-height: 32px;
 }
 
+/* Se modifica as dimenciones del formulario a través de esta clase */
 .form-ingreso-width-height{
     padding: 20px 50px;
     min-height: 200px;
@@ -64,6 +77,7 @@ body::before{
     text-decoration: none;
 }
 
+/* Se modifica el tamaño y ubicación del text "agenda tu cita" */
 #ingresar-plataforma>p{
     font-size: 32px;
     text-align: center;
@@ -71,6 +85,7 @@ body::before{
     margin: 5%;
 }
 
+/* Se centra el formulario de ingreso */
 .login-form{
     text-align: center;
     padding: 25px;
@@ -79,12 +94,14 @@ body::before{
     border-color: lightgrey;
 }
 
+/* Tamaño de los espacios de correo y clave del formulario */
 .input-email-clave{
     width: 90%;
     margin: 5px;
     height: 30px;
 }
 
+/* botón ingresar */
 #ingresar{
     width: 50%;
     height: 20%;
@@ -98,6 +115,7 @@ body::before{
 }
 
 
+/* Botones de gmail y otro de ingreso */
 .external-buttons{
     width: 100%;
     display: flex;
@@ -109,20 +127,24 @@ body::before{
     background-color: white;
 }
 
+/* modifica el texto dentro de los botones de gmail */
 .external-buttons > p{
     font-size: 0.9rem;    
 }
 
+/* Modifica la apriencia del enlace de registro */
 #registro > a {
     text-decoration: none;
     color: blue;
     padding: 10px;
 }
 
+/* se le agrega relleno al enlace de registro */
 #registro{
     padding: 10px;
 }
 
+/* efecto de sombreado sobre el enlace de registro cuando se pasa el cursor */
 #registro:hover{
     background-color: rgba(251, 255, 0, 0.432);
 }
