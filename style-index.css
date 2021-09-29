@@ -1,0 +1,99 @@
+/* *{
+    border: 2px solid red;
+} */
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient( 115deg, rgba(119, 125, 175, 0.932), rgba(136, 137, 206, 0.7) ), url(https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+    background-size: cover;
+    z-index: -1;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+
+}
+
+.contenedor{
+    margin-left: 0%;
+    margin-top: 0%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#logo-nombre{
+    grid-column: 1/4;
+    grid-row: 1/5;
+    align-self: center;
+    justify-self: end;
+    padding-right: 40px;
+}
+
+.img-logo-size{
+    height: 450px;
+    width: 350px;
+}
+
+#form-ingreso{
+    grid-column: 4/7;
+    grid-row: 1/5;
+    align-self: center;
+    justify-self: center;
+}
+
+
+.items-logo-center{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0px;
+}
+
+.img-buttons-size{
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.form-ingreso-width-height{
+    padding: 20px 50px;
+    min-height: 200px;
+    min-width: 300px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#ingresar-plataforma>p{
+    font-size: 32px;
+    text-align: center;
+    font-weight: bold;
+    margin: 5%;
+}
+
+.login-form{
+    text-align: center;
+    padding: 25px;
+    border-width: 1px;
+    border-style: ridge;
+    border-color: lightgrey;
+}
+
+.input-email-clave{
+    width: 90%;
+    margin: 5px;
+    height: 30px;
+}
+
+
+
+.external-buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
