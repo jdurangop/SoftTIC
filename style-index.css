@@ -9,7 +9,7 @@ body::before{
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient( 115deg, rgba(119, 125, 175, 0.932), rgba(136, 137, 206, 0.7) ), url(https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+    background-image: linear-gradient( 115deg, rgba(186, 189, 214, 0.932), rgba(201, 206, 136, 0.541) ), url(https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
     background-size: cover;
     z-index: -1;
     background-repeat: no-repeat;
@@ -44,7 +44,6 @@ body::before{
     align-self: center;
     justify-self: center;
 }
-
 
 .items-logo-center{
     text-align: center;
@@ -86,6 +85,17 @@ body::before{
     height: 30px;
 }
 
+#ingresar{
+    width: 50%;
+    height: 20%;
+    margin-top: 10px;
+    background-color: green;
+    border-radius: 10px;
+    border-width: 0;
+    color: aliceblue;
+    padding: 10px 10px;
+    font-weight: bold;
+}
 
 
 .external-buttons{
@@ -94,6 +104,28 @@ body::before{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    column-gap: 10px;
+    border-radius: 10px;
+    background-color: white;
 }
+
+.external-buttons > p{
+    font-size: 0.9rem;    
+}
+
+#registro > a {
+    text-decoration: none;
+    color: blue;
+    padding: 10px;
+}
+
+#registro{
+    padding: 10px;
+}
+
+#registro:hover{
+    background-color: rgba(251, 255, 0, 0.432);
+}
+
 
 
