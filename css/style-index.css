@@ -21,12 +21,14 @@ body::before{
 /* Se divide la pantalla en cuadros de 4 filas por 6 columnas.
 */
 .contenedor{
+    font-family: garamond;
     margin-left: 0%;
     margin-top: 0%;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
     max-height: 567px;
+    padding-top: 30px;
 }
 
 /* este es el id de la seccion de la imagen
@@ -114,12 +116,15 @@ entre el espacio que los contiene */
     color: aliceblue;
     padding: 20px 30px;
     font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
 
 /* Botones de gmail y otro de ingreso */
 .external-buttons{
     width: 100%;
+    padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -127,13 +132,11 @@ entre el espacio que los contiene */
     column-gap: 10px;
     border-radius: 10px;
     background-color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600; 
 }
 
-/* modifica el texto dentro de los botones de gmail */
-.external-buttons > p{
-    font-size: 0.9rem;
-    font-weight: 600;    
-}
 
 /* Modifica la apriencia del enlace de registro */
 #registro > a {
@@ -151,9 +154,9 @@ entre el espacio que los contiene */
 }
 
 /* efecto de sombreado sobre el enlace de registro cuando se pasa el cursor */
-#registro:hover{
+/* #registro:hover{
     background-color: rgba(251, 255, 0, 0.432);
-}
+} */
 
 
 /* Se modifica la pagina cuando cambia el ancho de la pagina */

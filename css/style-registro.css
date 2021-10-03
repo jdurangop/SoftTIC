@@ -22,6 +22,7 @@ body{
     width: 100%;
     margin-top: 0px;
     margin-left: 0px;
+    font-family: garamond;
 }
 
 .formulario-registro{
@@ -69,6 +70,7 @@ span{
 
 .btn-externo-registro{
     margin: 10px auto;
+    
 }
 
 .btn{
@@ -83,15 +85,12 @@ span{
     padding: 5px;
     border-style: none;
     border-radius: 10px;
-
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
 .btn > img {
     width: 32px;
     height: 32px;
     padding: 5px;
-}
-
-.btn > p{
-    font-size: 1rem;
 }
