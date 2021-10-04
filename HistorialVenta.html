@@ -11,7 +11,7 @@
 
 <body>
     <div class="flex-pos">
-        <div  class="title">
+        <div class="title">
             <h2>Historial de ventas</h2>
         </div>
         <div class="campo-busqueda">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="tableframe table-position">
-        <table class="dataframe">
+        <table class="dataframe" id="salesTable">
             <thead>
                 <tr>
                     <th>id</th>
@@ -836,7 +836,9 @@
         </table>
     </div>
     <div class="btns">
-        <button class="btn">Nueva venta</button>
+        <a id="nuevaV" href="registroVenta.html" title="link a registroVenta">
+            <button class="btn">Nueva venta</button>
+        </a>
         <button class="btn">Modificar venta</button>
     </div>
 </body>
