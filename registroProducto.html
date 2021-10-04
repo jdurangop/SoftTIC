@@ -5,46 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Venta</title>
+    <title>Registro producto</title>
     <link rel="stylesheet" href="css/style-registro.css">
 </head>
 
 <body>
 
     <div class="formulario-registro">
-        <h2>Registro Venta</h2>
+        <h2>Registro Producto</h2>
         <form action="">
             <div class="form-places">
-                <label for="name">Nombre producto</label>
-                <input type="text" id="productName" placeholder="Nombre producto" required>
-            </div>
-            <div class="form-places">
-                <label for="price">Valor</label>
-                <input type="number" id="price" placeholder="Valor de la venta" required>
+                <label for="idProd">ID producto</label>
+                <input type="number" id="productID" placeholder="ID del producto" required>
             </div>
             <div class="form-places">
                 <label for="description">Descripción</label>
-                <input type="text" id="description" placeholder="Descripción de la venta" required>
+                <input type="text" id="description" placeholder="Descripción del producto" required>
             </div>
             <div class="form-places">
-                <label for="paymentDate">Fecha de pago</label>
-                <input type="date" id="sPayDate" placeholder="Fecha de pago">
+                <label for="price">Valor</label>
+                <input type="number" id="price" placeholder="Valor del producto" required>
             </div>
+            
             <div class="form-places">
-                <label for="manager">ID del responsable</label>
-                <input type="text" id="manager" placeholder="Responsable de la venta">
+                <label for="status">Estado</label>
+                <input type="text" id="status" placeholder="Estado del producto">
             </div>
 
             <div class="btn-externo-registro">
-                <button type="submit" value="1" class="btn-registrarse" onclick="insertNewSale()">Registrar venta</button>
+                <button type="submit" value="1" class="btn-registrarse" onclick="insertNewProduct()">Registrar producto</button>
             </div>
 
         </form>
     </div>
 
     <script>
-        function insertNewSale() {
+        function insertNewProduct() {
             alert("Datos guardados exitosamente");
+            
             //const salesPage = window.open('HistorialVenta.html');
             // let table = document.getElementById("salesTable");
             // let row = table.insertRow(0);

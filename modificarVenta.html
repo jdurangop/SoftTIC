@@ -12,7 +12,7 @@
 <body>
 
     <div class="formulario-registro">
-        <h2>Registro Venta</h2>
+        <h2>Modificar Venta</h2>
         <form action="">
             <div class="form-places">
                 <label for="name">Nombre producto</label>
@@ -36,14 +36,19 @@
             </div>
 
             <div class="btn-externo-registro">
-                <button type="submit" value="1" class="btn-registrarse" onclick="insertNewSale()">Registrar venta</button>
+                <button type="submit" value="1" class="btn-registrarse" onclick="modifySale()">Modificar venta</button>
             </div>
-
         </form>
+
+        <div class="btns">
+            <a id="cancelar" href="HistorialVenta.html" title="link a HistorialVenta">
+                <button class="btn">Cancelar</button>
+            </a>
+        </div>
     </div>
 
     <script>
-        function insertNewSale() {
+        function modifySale() {
             alert("Datos guardados exitosamente");
             //const salesPage = window.open('HistorialVenta.html');
             // let table = document.getElementById("salesTable");
