@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Productos</title>
+    <link rel="stylesheet" href="css/style-historialVenta.css">
+</head>
+
+<body>
+    <div class="flex-pos">
+        <div class="title">
+            <h2>Historial de productos</h2>
+        </div>
+        <div class="campo-busqueda">
+            <input type="text">
+            <img src="https://cdn-icons-png.flaticon.com/512/93/93642.png" alt="Buscar" width="24px" height="24px">
+        </div>
+    </div>
+    <div class="tableframe table-position">
+        <table class="dataframe" id="salesTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Valor</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Ecografia</td>
+                    <td>7000</td>
+                    <td>Disponible</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Psicoligía</td>
+                    <td>5500</td>
+                    <td>Disponible</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Rehabilitación física</td>
+                    <td>6500</td>
+                    <td>No disponible</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Rehabilitación física</td>
+                    <td>6500</td>
+                    <td>Disponible</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btns">
+        <a id="nuevaV" href="registroProducto.html" title="link a registroProducto">
+            <button class="btn">Nuevo producto</button>
+        </a>
+        <a id="nuevaV" href="modificarProducto.html" title="link a modificarProducto">
+            <button class="btn">Modificar producto</button>
+        </a>
+    </div>
+</body>
+
+</html>
