@@ -31,15 +31,30 @@
         </div>
 
         <div id="form-option" class="form-ingreso-width-height">
-            <button type="submit" class="external-buttons"><img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" class="img-buttons-size">
+            <button id="btn-login" type="submit" class="external-buttons"><img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" class="img-buttons-size">
                 Ingresar con Google
             </button>
 
-            <p id="registro"><a href="registro.html">Registrate</a></p>
+            <p id="registro"><a href="registroUsuario.html">Registrate</a></p>
         </div>
         <div>
         </div>
     </div>
+
+     <!-- Firebase SDK (Software Development Kit) siempre se debe usar y debe ser el primero de colocar -->
+     <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app-compat.js"></script>
+
+     
+
+      <!-- Adicionar productos de Firebase que vamos a usar -->
+      <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-auth-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore-compat.js"></script>
+
+      <script src="js/app.js"></script>
+
+
+
+
 </body>
 
 </html>
