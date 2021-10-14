@@ -36,7 +36,6 @@ export function HistorialVentas() {
                         </tr>
                         ))
                         }
-                        
                     </tbody>
                 </table>
             </div>
