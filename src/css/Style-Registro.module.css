@@ -1,0 +1,86 @@
+/* *{
+    border: 1px solid red;
+} */
+
+
+.formulario-registro{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    text-align: center;
+    padding: 25px;
+    background-color: rgba(212, 209, 175, 0.664);
+}
+
+.form-places{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.form-places > label{
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.form-places > input{
+    font-size: 1.2rem;
+}
+
+span{
+    font-style: italic;
+    color: gray;
+    font-weight: 600;
+}
+
+.btn-registrarse{
+    width: 300px;
+    margin: 10px auto;
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: rgb(10, 160, 18);
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 10px;
+}
+
+.btn-cancelar{
+    width: 300px;
+    margin: 10px auto;
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: rgb(124, 7, 7);
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 10px;
+}
+
+.btn-externo-registro{
+    margin: 10px auto;
+    
+}
+
+.btn{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    width: 300px;
+    padding: 5px;
+    border-style: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn > img {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+}

@@ -1,0 +1,41 @@
+
+.HeaderHome{
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 10%;
+    flex-wrap: wrap;
+    padding: 10px;
+    font-family: garamond;
+}
+
+
+.linkLogoHome{
+    text-decoration: none;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.logoSM{
+    height: 4rem;
+    width: auto;
+    padding: 5px;
+    justify-self: center;
+}
+
+.textoSM{
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    color: blue;
+    align-self: center;
+    padding: 10px;
+}
+
+.HeaderWelcome{
+    align-self: center;
+    font-size: 2rem;
+    margin-right: 2.5%;
+    color: rgb(0, 4, 255);
+}
+
