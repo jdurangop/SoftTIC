@@ -1,5 +1,6 @@
 import styles from "../css/Style-Historial.module.css"
 
+
 export function ListaUsuarios() {
     return (
         <div>
