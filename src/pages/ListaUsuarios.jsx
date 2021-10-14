@@ -1,7 +1,9 @@
 import styles from "../css/Style-Historial.module.css"
+import usuarios from "../datosPrueba/Usuarios.json"
 
 
 export function ListaUsuarios() {
+
     return (
         <div>
             <div className={styles["flex-pos"]}>
@@ -9,7 +11,7 @@ export function ListaUsuarios() {
                     <h2>Usuarios</h2>
                 </div>
                 <div className={styles["campo-busqueda"]}>
-                    <input type="text" placeholder="Buscar: id-#, des-texto"/>
+                    <input type="text" placeholder="Buscar: id-#, des-texto" />
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
@@ -26,16 +28,19 @@ export function ListaUsuarios() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Halli</td>
-                            <td>Boik</td>
-                            <td>hboik0@huffingtonpost.com</td>
-                            <td>Female</td>
-                            <td>General</td>
-                            <td>Autorizado</td>
-                        </tr>
-                       
+                        {
+                            usuarios.map((usuario) => (
+                                <tr key={usuario.id}>
+                                    <td>{usuario.id}</td>
+                                    <td>{usuario.Nombres}</td>
+                                    <td>{usuario.Apellidos}</td>
+                                    <td>{usuario.Correo}</td>
+                                    <td>{usuario.Genero}</td>
+                                    <td>{usuario.Rol}</td>
+                                    <td>{usuario.Estado}</td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>

@@ -1,4 +1,5 @@
 import styles from "../css/Style-Historial.module.css"
+import productos from "../datosPrueba/Productos.json"
 
 
 export function HistorialProductos() {
@@ -9,7 +10,7 @@ export function HistorialProductos() {
                     <h2>Lista de productos</h2>
                 </div>
                 <div className={styles["campo-busqueda"]}>
-                    <input type="text" placeholder="Buscar: id-#, des-texto"/>
+                    <input type="text" placeholder="Buscar: id-#, des-texto" />
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
@@ -23,18 +24,18 @@ export function HistorialProductos() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Ecografia</td>
-                            <td>7000</td>
-                            <td>Disponible</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Psicoligía</td>
-                            <td>5500</td>
-                            <td>Disponible</td>
-                        </tr>
+                        {
+                            productos.map((producto) => (
+                                <tr key={producto.id}>
+                                    <td>{producto.id}</td>
+                                    <td>{producto["Descripción"]}</td>
+                                    <td>{producto.Valor}</td>
+                                    <td>{producto.Estado}</td>
+                                </tr>
+                            ))
+                        }
+
+
                     </tbody>
                 </table>
             </div>

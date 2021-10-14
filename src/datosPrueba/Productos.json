@@ -1,0 +1,10 @@
+[{"id":1,"Descripción":"Medicina general","Valor":8870,"Estado":"Disponible"},
+{"id":2,"Descripción":"Odontología","Valor":6514,"Estado":"Disponible"},
+{"id":3,"Descripción":"Oftalmológica","Valor":9585,"Estado":"Disponible"},
+{"id":4,"Descripción":"Optometria","Valor":9513,"Estado":"No disponible"},
+{"id":5,"Descripción":"Psicoligía","Valor":9198,"Estado":"No disponible"},
+{"id":6,"Descripción":"Ortopedia","Valor":7670,"Estado":"Disponible"},
+{"id":7,"Descripción":"Rehabilitación física","Valor":7746,"Estado":"No disponible"},
+{"id":8,"Descripción":"Ecografia","Valor":5499,"Estado":"No disponible"},
+{"id":9,"Descripción":"Laboratorio clínico","Valor":7227,"Estado":"No disponible"},
+{"id":10,"Descripción":"Nutrición","Valor":8799,"Estado":"Disponible"}]
