@@ -10,10 +10,6 @@ export function RegistroProducto(){
         <h2>Registro Producto</h2>
         <form>
             <div className={styleRegProd["form-places"]}>
-                <label for="idProd">ID producto</label>
-                <input type="number" min="0" id="productID" placeholder="ID del producto" required/>
-            </div>
-            <div className={styleRegProd["form-places"]}>
                 <label for="description">Descripción</label>
                 <input type="text" id="description" placeholder="Descripción del producto" required/>
             </div>

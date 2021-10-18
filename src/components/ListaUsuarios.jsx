@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "../css/Style-Historial.module.css"
 import usuarios from "../datosPrueba/Usuarios.json"
 
@@ -15,21 +16,23 @@ export function ListaUsuarios() {
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
-                <table className={`${styles["dataframe"]} ${styles.BodyHist}`}>
+                <table className={`${styles.BodyHist}`}>
                     <thead>
                         <tr>
                             <th>id</th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Correo</th>
-                            <th>Genero</th>
+                            <th>Género</th>
                             <th>Rol</th>
                             <th>Estado</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             usuarios.map((usuario) => (
+
                                 <tr key={usuario.id}>
                                     <td>{usuario.id}</td>
                                     <td>{usuario.Nombres}</td>
@@ -38,15 +41,16 @@ export function ListaUsuarios() {
                                     <td>{usuario.Genero}</td>
                                     <td>{usuario.Rol}</td>
                                     <td>{usuario.Estado}</td>
+                                    <td><Link className={styles.btnEdit} to={`/users/${usuario.id}`}>Editar</Link></td>
                                 </tr>
+
                             ))
                         }
                     </tbody>
                 </table>
             </div>
             <div className={styles["btns"]}>
-                <button className={styles["btn"]}>Nuevo Usuario</button>
-                <button className={styles["btn"]}>Modificar Usuario</button>
+                <Link className={styles["btn"]} to="/users/regUsuario">Nuevo Usuario</Link>
             </div>
         </div>
     );

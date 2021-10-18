@@ -6,9 +6,11 @@
     margin-top: 0%;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 100%);
     max-height: 567px;
     padding-top: 30px;
+    /* height: 1000px; */
+    align-items: center;
 }
 
 /* este es el id de la seccion de la imagen
@@ -17,14 +19,13 @@ las columnas 1 y 4 y las filas 1 y 5 */
 .logo-nombre{
     grid-column: 1/4;
     grid-row: 1/5;
-    align-self: center;
     justify-self: end;
     padding-right: 9%;
 }
 
 /* Clase para el tamaño de la imagen */
 .img-logo-size{
-    height: 400px;
+    height: 350px;
     width: 350px;
 }
 
@@ -33,9 +34,8 @@ las columnas 1 y 4 y las filas 1 y 5 */
 .form-ingreso{
     grid-column: 4/7;
     grid-row: 1/5;
-    align-self: center;
     justify-self: start;
-    padding-left: 10%;
+    padding-top: 35px;
 }
 
 /* Se centran los cuadros de texto y el logo
@@ -54,7 +54,7 @@ entre el espacio que los contiene */
 
 /* Se modifica las dimenciones del formulario a través de esta clase */
 .form-ingreso-width-height{
-    padding: 20px 50px;
+    padding: 10px 50px 5px;
     min-height: 200px;
     min-width: 300px;
     text-align: center;
@@ -83,6 +83,8 @@ entre el espacio que los contiene */
     width: 90%;
     margin: 5px;
     height: 30px;
+    padding: 3px;
+    font-size: 1rem;
 }
 
 /* botón ingresar */
@@ -119,18 +121,15 @@ entre el espacio que los contiene */
 
 
 /* Modifica la apriencia del enlace de registro */
-.registro > a {
+/* se le agrega relleno al enlace de registro */
+.registro{
+    background-color: rgba(255, 228, 196, 0.274);
+    padding: 10px;
     text-decoration: none;
     color: rgb(0, 0, 255);
     padding: 10px;
     font-size: 1.2rem;
     font-weight: bold;
-}
-
-/* se le agrega relleno al enlace de registro */
-.registro{
-    background-color: rgba(255, 228, 196, 0.274);
-    padding: 10px;
 }
 
 /* efecto de sombreado sobre el enlace de registro cuando se pasa el cursor */

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "../css/Style-Historial.module.css"
 import productos from "../datosPrueba/Productos.json"
 
@@ -21,6 +22,7 @@ export function HistorialProductos() {
                             <th>Descripción</th>
                             <th>Valor</th>
                             <th>Estado</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +33,7 @@ export function HistorialProductos() {
                                     <td>{producto["Descripción"]}</td>
                                     <td>{producto.Valor}</td>
                                     <td>{producto.Estado}</td>
+                                    <td><Link className={styles.btnEdit} to={`/products/${producto.id}`}>Editar</Link></td>
                                 </tr>
                             ))
                         }
@@ -40,12 +43,7 @@ export function HistorialProductos() {
                 </table>
             </div>
             <div className={styles["btns"]}>
-                <a id="nuevaV" href="registroProducto.html" title="link a registroProducto">
-                    <button className={styles["btn"]}>Nuevo producto</button>
-                </a>
-                <a id="nuevaV" href="modificarProducto.html" title="link a modificarProducto">
-                    <button className={styles["btn"]}>Modificar producto</button>
-                </a>
+                <Link className={styles["btn"]} to="/products/crearProducto">Crear Producto</Link>
             </div>
         </div>
     );

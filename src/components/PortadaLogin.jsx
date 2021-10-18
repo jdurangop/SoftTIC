@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "../css/Style-Portada.module.css"
 
 export function PortadaLogin() {
@@ -27,8 +28,8 @@ export function PortadaLogin() {
                     <button type="submit" className={styles["external-buttons"]}><img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" className={styles["img-buttons-size"]} />
                         Ingresar con Google
                     </button>
-
-                    <p className={styles["registro"]}><a href="registro.html">Registrate</a></p>
+                    <br />
+                    <Link to="/Registro" className={styles["registro"]}>Registrate</Link>
                 </div>
             </div>
         </div>
