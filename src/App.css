@@ -19,3 +19,32 @@ body{
   margin-left: 0px;
   font-family: garamond;
 }
+
+.btn-signOut{
+  background-color: none;
+  width: 80%;
+  margin: 0px auto;
+  z-index: 1;
+  /* position: absolute; */
+  left: 15%;
+  top: 10%;
+  text-align: right;
+}
+
+.btn-signOut>button{
+  padding: 5px;
+  border-style: none;
+  font-size: large;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+}
+
+.btn-signOut>button:hover{
+  background-color: rgba(37, 144, 216, 0.493);
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.visibilidad{
+  visibility: hidden;
+}

@@ -1,7 +1,7 @@
 import { useParams, useHistory } from "react-router";
 import { useState, useEffect } from "react";
-import styleRegProd from "../css/Style-Registro.module.css"
-import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabase } from "../config/firebase"
+import styleRegProd from "../../css/Style-Registro.module.css"
+import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabase } from "../../config/firebase"
 
 
 export function ModificarUsuario() {

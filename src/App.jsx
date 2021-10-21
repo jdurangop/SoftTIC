@@ -3,7 +3,7 @@ import './App.css';
 import { AppRouters } from './components/AppRouters';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useState } from 'react';
-import { RegistroUsuario } from './components/RegistroUsusario';
+import { RegistroUsuario } from './components/usuarios/RegistroUsusario';
 import { PortadaLogin } from './components/PortadaLogin';
 
 
@@ -23,25 +23,29 @@ function App() {
     })
 
   }
-  
+
 
 
   onAuthStateChanged(auth, (usuario) => {
     if (usuario) {
       setUser(auth.currentUser);
       console.log("SI");
-      return
+      // return
     }
     else {
-      console.log("So");
       setUser(auth.currentUser)
-      return
+      // return
     }
   })
 
 
   return (
     <>
+      <div id="btn-signOut" className={user ? "btn-signOut" : "btn-signOut visibilidad"}>
+        <button
+          onClick={handleSalir}
+        >Cerrar sesión</button>
+      </div>
       <Router>
         <Switch>
           <Route exact path="/" children={user ? <AppRouters User={user} /> : <Redirect to="/p" />} />
@@ -50,9 +54,6 @@ function App() {
           <Route exact path="*" children={user ? <Redirect to="/" /> : <Redirect to="/p" />} />
         </Switch>
       </Router>
-      <button
-        onClick={handleSalir}
-      >Salir</button>
     </>
   );
 }

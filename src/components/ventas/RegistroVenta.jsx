@@ -1,7 +1,7 @@
 import { useParams, useHistory } from "react-router";
 import { useState, useEffect } from "react";
-import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabase } from "../config/firebase"
-import styles from "../css/Style-Registro.module.css"
+import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabase } from "../../config/firebase"
+import styles from "../../css/Style-Registro.module.css"
 
 export function RegistroVenta() {
 

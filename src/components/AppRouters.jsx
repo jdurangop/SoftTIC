@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import { LandingPage } from "./LandingPage";
 import styleHome from "../css/HomePage.module.css"
-import { ListaUsuarios } from "./ListaUsuarios";
-import { HistorialVentas } from './historialVentas';
-import { HistorialProductos } from './HistorialProductos';
-import { ModificarUsuario } from './ModificarUsuario';
-import { RegistroVenta } from './RegistroVenta';
-import { RegistroProducto } from './RegistroProducto';
+import { ListaUsuarios } from "./usuarios/ListaUsuarios";
+import { HistorialVentas } from './ventas/historialVentas';
 // import { PageNotFound } from './PageNotFound';
+import { HistorialProductos } from './productos/HistorialProductos';
+import { ModificarUsuario } from './usuarios/ModificarUsuario';
+import { RegistroVenta } from './ventas/RegistroVenta';
+import { RegistroProducto } from './productos/RegistroProducto';
 
 export function AppRouters({User}) {
         

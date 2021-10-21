@@ -40,6 +40,7 @@ export const crearUsuarioCorreo = async (auth, email, password) => {
         return user
     } catch (error) {
         console.log(error);
+        return 0
     }
 }
 
@@ -61,6 +62,7 @@ export const signUsuarioGoogle = async (auth) => {
         console.log(error.email);
         // The AuthCredential type that was used.
         console.log(GoogleAuthProvider.credentialFromError(error));
+        return 0;
     }
 
 }
@@ -74,8 +76,8 @@ export const signUsuarioCorreo = async (auth, email, password) => {
     } catch (error) {
 
         // Handle Errors here.
-        console.log(error.code);
-        console.log(error.message);
+        console.log(error);
+        return 0
         
     }
 
