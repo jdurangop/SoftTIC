@@ -1,33 +1,39 @@
 .menu-box{
     text-align: center;
+    margin: 0 auto;
 }
 
 .ul-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     list-style: none;
-    padding: 50px 30px;
-    background-color: #0084ff3f;
-    width: 60vh;
+    padding: 5%;
+    /* background-color: #01937d70; */
+    width: 80%;
     margin: 0 auto;
     border-radius: 15px;
 }
 
 .li-box{
-    padding: 20px;
-    background-color: #ffffff;
+    padding: 75px 0px;
+    width: 200px;
+    background-color: #E0D7AB;
     margin-top: 10px;
     border-radius: 15px;
+    height: 200px;
+    box-sizing: border-box;
+    box-shadow: 3px 2px 2px rgba(18, 27, 102, 0.589);
 }
 
 .li-box:hover{
-    background-color: lightgray;
-    border-radius: 50px;
+    opacity: 0.8;
 }
 
 .li-Link{
-    width: 100%;
-    height: 100%;
     text-decoration: none;
     font-size: 2.5rem;
     font-weight: bold;
-    color: rgb(0, 4, 255);
+    color: #0a0a7f;
 }
