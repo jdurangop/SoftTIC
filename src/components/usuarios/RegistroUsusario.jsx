@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styleRegProd from "../../css/Style-Registro.module.css"
-import { crearUsuarioCorreo } from '../../config/firebase';
+import { crearUsuarioCorreo, guardarDatabase } from '../../config/firebase';
 import { validate } from "email-validator";
 
 export function RegistroUsuario({Auth}) {
@@ -32,15 +32,15 @@ export function RegistroUsuario({Auth}) {
 
         const usuario = await crearUsuarioCorreo(Auth, email, password)
         if(usuario){
-            const venta = {
-                nombre,
+            const user = {
+                nombres,
                 genero,
                 email,
                 rol: "General",
                 estado: "Pendiente"
             }
     
-            await guardarDatabase('lista-usuarios', venta)
+            await guardarDatabase('lista-usuarios', user)
         }
         history.push('/p')
     }

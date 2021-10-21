@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "../css/Style-Historial.module.css"
+import styles from "../../css/Style-Historial.module.css"
 import { useState, useEffect } from "react";
 import { consultarDatabase } from "../../config/firebase"
 
