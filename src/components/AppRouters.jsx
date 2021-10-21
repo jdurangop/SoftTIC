@@ -12,8 +12,10 @@ import { HistorialProductos } from './HistorialProductos';
 import { ModificarUsuario } from './ModificarUsuario';
 import { RegistroVenta } from './RegistroVenta';
 import { RegistroProducto } from './RegistroProducto';
+// import { PageNotFound } from './PageNotFound';
 
-export function AppRouters() {
+export function AppRouters({User}) {
+        
     return (
         <Router>
             <header className={styleHome.HeaderHome}>
@@ -24,24 +26,21 @@ export function AppRouters() {
                 </div>
                 <div className={styleHome.HeaderWelcome}>
                     <span className={styleHome.textWWelcome}>
-                        Bienvenido "Pepito"
+                        Bienvenido {`${User.displayName}`}
                     </span>
                 </div>
             </header>
 
             <main>
                 <Switch>
-                    <Route exact path="/users" component={ListaUsuarios}/>
-                    <Route exact path="/users/regUsuario" component={ModificarUsuario} />
-                    <Route exact path="/users/:id" component={ModificarUsuario}/>
+                
+                    <Route exact path="/users" component={ListaUsuarios} />
+                    <Route exact path="/users/:id" component={ModificarUsuario} />
                     <Route exact path="/sales" component={HistorialVentas} />
-                    <Route exact path="/sales/NuevaVenta" component={RegistroVenta} />
-                    <Route exact path="/sales/:id" component={RegistroVenta}/>
+                    <Route exact path="/sales/:id" component={RegistroVenta} />
                     <Route exact path="/products" component={HistorialProductos} />
-                    <Route exact path="/products/crearProducto" component={RegistroProducto} />
-                    <Route exact path="/products/:id" component={RegistroProducto}/>
-                    <Route path="/" component={LandingPage} />
-                    <Route exact path="*" component={<h1>Page Not Found</h1>}/>
+                    <Route exact path="/products/:id" component={RegistroProducto} />
+                    <Route exact path="/" component={LandingPage} />
                 </Switch>
             </main>
         </Router>

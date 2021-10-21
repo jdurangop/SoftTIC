@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "../css/Style-Historial.module.css"
-import usuarios from "../datosPrueba/Usuarios.json"
+import { useState, useEffect } from "react";
+import { consultarDatabase } from "../config/firebase"
 
 
 export function ListaUsuarios() {
+    const [listaUsuarios, setListaUsuarios] = useState([])
+
+    const cargarUsuarios = async ()=>{
+        const temp = await consultarDatabase("lista-usuarios");
+        setListaUsuarios(temp);
+    }
+
+    useEffect(()=> {
+        cargarUsuarios()
+    }, [])
 
     return (
         <div>
@@ -21,7 +32,6 @@ export function ListaUsuarios() {
                         <tr>
                             <th>id</th>
                             <th>Nombres</th>
-                            <th>Apellidos</th>
                             <th>Correo</th>
                             <th>Género</th>
                             <th>Rol</th>
@@ -31,16 +41,15 @@ export function ListaUsuarios() {
                     </thead>
                     <tbody>
                         {
-                            usuarios.map((usuario) => (
+                            listaUsuarios.map((usuario, index) => (
 
-                                <tr key={usuario.id}>
-                                    <td>{usuario.id}</td>
-                                    <td>{usuario.Nombres}</td>
-                                    <td>{usuario.Apellidos}</td>
-                                    <td>{usuario.Correo}</td>
-                                    <td>{usuario.Genero}</td>
-                                    <td>{usuario.Rol}</td>
-                                    <td>{usuario.Estado}</td>
+                                <tr key={index + 1}>
+                                    <td>{index + 1}</td>
+                                    <td>{usuario.nombre}</td>
+                                    <td>{usuario.email}</td>
+                                    <td>{usuario.genero}</td>
+                                    <td>{usuario.rol}</td>
+                                    <td>{usuario.estado}</td>
                                     <td><Link className={styles.btnEdit} to={`/users/${usuario.id}`}>Editar</Link></td>
                                 </tr>
 
