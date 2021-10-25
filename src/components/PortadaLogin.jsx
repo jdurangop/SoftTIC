@@ -3,19 +3,22 @@ import styles from "../css/Style-Portada.module.css"
 import { signUsuarioGoogle, signUsuarioCorreo } from "../config/firebase";
 
 
-export function PortadaLogin({Auth}) {
+
+
+export function PortadaLogin() {
 
 
     const handleSingIn = async (e) => {
         e.preventDefault();
-        signUsuarioGoogle(Auth);
+        await signUsuarioGoogle();
     };
 
     const handleSingInCorreo = async (e) => {
         e.preventDefault();
         const correo = document.getElementById("email");
         const clave = document.getElementById("clave");
-        signUsuarioCorreo(Auth, correo, clave);
+
+        await signUsuarioCorreo(correo.value, clave.value);
     };
 
 
@@ -33,16 +36,16 @@ export function PortadaLogin({Auth}) {
 
             <div className={styles["form-ingreso"]}>
                 <div className={`${styles["form-ingreso-width-height"]} ${styles["ingresar-plataforma"]}`}>
-                    <p>Agenda tu cita</p>
-                    <form className={styles["login-form"]}>
+                    <p>Bienvenido</p>
+                    <form onSubmit={(e) => e.preventDefault()} className={styles["login-form"]}>
                         <input type="email" id="email" className={styles["input-email-clave"]} placeholder="Correo" />
                         <br />
                         <input type="password" id="clave" className={styles["input-email-clave"]} placeholder="Contraseña" />
                         <br />
                         <button
-                        type="submit"
-                        className={styles["ingresar"]}
-                        onClick={handleSingInCorreo}>Ingresar</button>
+                            type="submit"
+                            className={styles["ingresar"]}
+                            onClick={handleSingInCorreo}>Ingresar</button>
                     </form>
                 </div>
 
@@ -50,8 +53,12 @@ export function PortadaLogin({Auth}) {
                     <button
                         type="submit"
                         className={styles["external-buttons"]}
-                        onClick={handleSingIn}><img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" className={styles["img-buttons-size"]} />
-                        Ingresar con Google
+                        onClick={handleSingIn}
+                        ><img 
+                        src="https://cdn-icons-png.flaticon.com/512/300/300221.png" 
+                        alt="Google"
+                        className={styles["img-buttons-size"]}
+                        />Ingresar con Google
                     </button>
                     <br />
                     <Link to="/Registro" className={styles["registro"]}>Registrate</Link>

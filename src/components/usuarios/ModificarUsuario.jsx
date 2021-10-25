@@ -7,21 +7,19 @@ import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabas
 export function ModificarUsuario() {
     const { id } = useParams();
 
-    const [nombre, setNombre] = useState("");
+    const [nombres, setNombres] = useState("");
     const [email, setEmail] = useState("");
     const [genero, setGenero] = useState("");
     const [rol, setRol] = useState("");
-    const [estado, setEstado] = useState("");
 
     const history = useHistory();
 
     const consultarUsuario = async (idUsuario) => {
         const Temp = await consultarDocumentoDatabase('lista-usuarios', idUsuario)
-        setNombre(Temp.nombre);
+        setNombres(Temp.nombres);
         setEmail(Temp.email);
         setGenero(Temp.genero);
         setRol(Temp.rol);
-        setEstado(Temp.estado);
     }
 
     useEffect(() => {
@@ -30,11 +28,10 @@ export function ModificarUsuario() {
             consultarUsuario(id)
         }
 
-        setNombre("");
+        setNombres("");
         setEmail("");
         setGenero("");
         setRol("");
-        setEstado("");
 
 
     }, [id])
@@ -43,11 +40,10 @@ export function ModificarUsuario() {
         e.preventDefault()
 
         const usuario = {
-            nombre,
+            nombres,
             email,
             genero,
             rol,
-            estado
         }
 
         await actualizarDocumentoDatabase('lista-usuarios', id, usuario)
@@ -60,11 +56,10 @@ export function ModificarUsuario() {
         e.preventDefault()
 
         const usuario = {
-            nombre,
+            nombres,
             email,
             genero,
-            rol,
-            estado
+            rol
         }
 
         await guardarDatabase('lista-usuarios', usuario)
@@ -75,72 +70,63 @@ export function ModificarUsuario() {
         <div>
             <div className={styleRegProd["formulario-registro"]}>
                 <h2>
-                {id === "regUsuario" ? "Registrar" : "Modificar"} Usuario
+                    {id === "regUsuario" ? "Registrar" : "Modificar"} Usuario
                 </h2>
                 <form >
                     <div className={styleRegProd["form-places"]}>
                         <label >Nombre(s)</label>
                         <input
-                        type="text"
-                        name="name"
-                        placeholder="Nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)} />
+                            type="text"
+                            name="name"
+                            placeholder="Nombre"
+                            value={nombres}
+                            onChange={(e) => setNombres(e.target.value)} />
                     </div>
-                   
+
                     <div className={styleRegProd["form-places"]}>
                         <label >Correo electrónico</label>
                         <input
-                        type="email"
-                        placeholder="Escribe tu correo electronico"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} />
+                            type="email"
+                            placeholder="Escribe tu correo electronico"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} />
                     </div>
 
                     <div className={styleRegProd["form-places"]}>
                         <label >Género</label>
                         <input
-                        type="text"
-                        placeholder="Opcional"
-                        value={genero}
-                        onChange={(e) => setGenero(e.target.value)} />
+                            type="text"
+                            placeholder="Opcional"
+                            value={genero}
+                            onChange={(e) => setGenero(e.target.value)} />
                     </div>
                     <div className={styleRegProd["form-places"]}>
                         <label>Rol</label>
                         <select
-                        name="Rol"
-                        value={rol}
-                        onChange={(e) => setRol(e.target.value)}>
+                            name="Rol"
+                            value={rol}
+                            onChange={(e) => setRol(e.target.value)}>
                             <option value="General">General</option>
                             <option value="Administrador">Administrador</option>
                             <option value="Vendedor">Vendedor</option>
                         </select>
                     </div>
-                    <div className={styleRegProd["form-places"]}>
-                        <label >Estado</label>
-                        <select
-                        name="Estado"
-                        value={estado}
-                        onChange={(e) => setEstado(e.target.value)}>
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="No autorizado">No Autorizado</option>
-                            <option value="Autorizado">Autorizado</option>
-                        </select>
+
+
+                    <div className={styleRegProd["btn-externo-registro"]}>
+                        <button
+                            type="submit"
+                            className={styleRegProd["btn-registrarse"]}
+                            onClick={id === 'regUsuario' ? handleGuardarUsuario : handleActualizarUsuario}
+                        >{id === "regUsuario" ? "Crear" : "Modificar"} Usuario</button>
                     </div>
 
                     <div className={styleRegProd["btn-externo-registro"]}>
                         <button
-                        type="submit"
-                        className={styleRegProd["btn-registrarse"]}
-                        onClick={id === 'regUsuario' ? handleGuardarUsuario : handleActualizarUsuario}
-                    >{id === "regUsuario" ? "Crear" : "Modificar"} Usuario</button>
-                    </div>
-
-                    <div className={styleRegProd["btn-externo-registro"]}>
-                        <button
-                        type="submit"
-                        className={styleRegProd["btn-cancelar"]}
-                        onClick={(e) => {history.push("/users")}}>Cancelar</button>
+                            type="submit"
+                            className={styleRegProd["btn-cancelar"]}
+                            onClick={() => { history.push("/users") }}
+                        >Cancelar</button>
                     </div>
 
                 </form>
