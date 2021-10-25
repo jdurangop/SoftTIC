@@ -29,7 +29,12 @@ export function RegistroUsuario() {
             return
         }
 
-        await crearUsuarioCorreo(email, password, name)
+        const res = await crearUsuarioCorreo(email.trim(), password, name.trim())
+
+        if(res === 0){
+            alert("Datos de usuario no validos")
+            return
+        }
 
         history.push('/p')
     }
@@ -83,6 +88,9 @@ export function RegistroUsuario() {
                         className={styleRegProd["btn-cancelar"]}
                         onClick={(e) => {
                             e.preventDefault()
+                            setEmail("")
+                            setName("")
+                            setPassword("")
                             history.push("/")
                         }}
                     >Cancelar</button>

@@ -72,8 +72,8 @@ export function AppRouters({ User }) {
                     <Route exact path="/users" children={rol !== 1 ? <Redirect to="/" /> : <ListaUsuarios />} />
                     <Route exact path="/users/:id" children={rol !== 1 ? <Redirect to="/" /> : <ModificarUsuario />} />
 
-                    <Route exact path="/sales" children={rol !== 0 ? <HistorialVentas /> : <Redirect to="/" />} />
-                    <Route exact path="/sales/:id" children={rol !== 0 ? <RegistroVenta /> : <Redirect to="/" />} />
+                    <Route exact path="/sales" children={rol !== 0 ? <HistorialVentas Rol={rol} /> : <Redirect to="/" />} />
+                    <Route exact path="/sales/:id" children={rol !== 0 ? <RegistroVenta Rol={rol} /> : <Redirect to="/" />} />
 
                     <Route exact path="/products" children={rol !== 1 ? <Redirect to="/" /> : <HistorialProductos />} />
                     <Route exact path="/products/:id" children={rol !== 1 ? <Redirect to="/" /> : <RegistroProducto />} />

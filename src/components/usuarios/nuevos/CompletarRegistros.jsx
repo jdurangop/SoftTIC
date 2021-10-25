@@ -23,6 +23,7 @@ export function CompletarRegistros({ idUser }) {
         setGenero(Temp.genero);
         setRol(Temp.rol);
         setUid(Temp.uid);
+        setEdad(Temp.fechaNa)
     }
 
     const handleGuardar = async (e) => {
@@ -47,7 +48,7 @@ export function CompletarRegistros({ idUser }) {
             nombres,
             email,
             genero,
-            edad,
+            fechaNa: edad,
             rol,
             uid
         }
@@ -107,6 +108,8 @@ export function CompletarRegistros({ idUser }) {
                             value={edad}
                             onChange={(e) => setEdad(e.target.value.toLowerCase())} />
                     </div>
+
+                    <h2>Por favor completa tu registro y espera a que la administración te de la autorización como vendedor</h2>
 
 
                     <div className={styleRegProd["btn-externo-registro"]}>

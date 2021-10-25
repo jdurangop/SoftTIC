@@ -7,11 +7,12 @@ import { RegistroUsuario } from './components/usuarios/RegistroUsusario';
 import { PortadaLogin } from './components/PortadaLogin';
 import { SalirUsuario, auth, consultaPorItemDocumentos, guardarDatabase } from './config/firebase';
 import { useEffect } from 'react';
+import { LoadingPage } from "./components/LoadingPage";
 
 
 function App() {
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(false)
 
   const handleSalir = async (e) => {
     e.preventDefault()
@@ -22,9 +23,10 @@ function App() {
   useEffect(() => {
 
     onAuthStateChanged(auth, async (usuario) => {
+      setLoading(true)
       if (usuario) {
+
         const consulta = await consultaPorItemDocumentos("lista-usuarios", "email", "==", usuario.email);
-        console.log(consulta);
         if (consulta.length === 0) {
           const user = {
             uid: usuario.uid,
@@ -36,7 +38,7 @@ function App() {
           }
 
           await guardarDatabase('lista-usuarios', user);
-          
+
 
         }
 
@@ -48,28 +50,35 @@ function App() {
         setUser(null)
 
       }
+      setLoading(false)
     })
+
   }, [setUser])
-
-
-
 
   return (
     <>
-      <div id="btn-signOut" className={user ? "btn-signOut" : "btn-signOut visibilidad"}>
-        <button
+      {
+        loading
+          ?
+          <LoadingPage />
+          :
+          <div>
+            <div id="btn-signOut" className={user ? "btn-signOut" : "btn-signOut visibilidad"}>
+              <button
 
-          onClick={handleSalir}
-        >Cerrar sesión</button>
-      </div>
-      <Router>
-        <Switch>
-          <Route exact path="/" children={user ? <AppRouters User={user} /> : <Redirect to="/p" />} />
-          <Route exact path="/Registro" children={user ? <Redirect to="/" /> : <RegistroUsuario />} />
-          <Route path="/p" children={user ? <Redirect to="/" /> : <PortadaLogin />} />
-          <Route exact path="*" children={user ? <Redirect to="/" /> : <Redirect to="/p" />} />
-        </Switch>
-      </Router>
+                onClick={handleSalir}
+              >Cerrar sesión</button>
+            </div>
+            <Router>
+              <Switch>
+                <Route exact path="/" children={user ? <AppRouters User={user} /> : <Redirect to="/p" />} />
+                <Route exact path="/Registro" children={user ? <Redirect to="/" /> : <RegistroUsuario />} />
+                <Route path="/p" children={user ? <Redirect to="/" /> : <PortadaLogin />} />
+                <Route exact path="*" children={user ? <Redirect to="/" /> : <Redirect to="/p" />} />
+              </Switch>
+            </Router>
+          </div>}
+
     </>
   );
 }

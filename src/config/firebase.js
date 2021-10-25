@@ -49,10 +49,12 @@ export const crearUsuarioCorreo = async (email, password, nombre) => {
 
         return user
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         return 0
     }
 }
+
+
 
 const provider = new GoogleAuthProvider();
 

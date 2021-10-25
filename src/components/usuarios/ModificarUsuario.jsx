@@ -4,6 +4,7 @@ import styleRegProd from "../../css/Style-Registro.module.css"
 import { consultarDocumentoDatabase, actualizarDocumentoDatabase, guardarDatabase } from "../../config/firebase"
 
 
+
 export function ModificarUsuario() {
     const { id } = useParams();
 
@@ -11,6 +12,7 @@ export function ModificarUsuario() {
     const [email, setEmail] = useState("");
     const [genero, setGenero] = useState("");
     const [rol, setRol] = useState("");
+    const [fechaNa, setFechaNa] = useState("");
 
     const history = useHistory();
 
@@ -20,6 +22,7 @@ export function ModificarUsuario() {
         setEmail(Temp.email);
         setGenero(Temp.genero);
         setRol(Temp.rol);
+        setFechaNa(Temp.fechaNa)
     }
 
     useEffect(() => {
@@ -32,6 +35,7 @@ export function ModificarUsuario() {
         setEmail("");
         setGenero("");
         setRol("");
+        setFechaNa("");
 
 
     }, [id])
@@ -44,6 +48,7 @@ export function ModificarUsuario() {
             email,
             genero,
             rol,
+            fechaNa
         }
 
         await actualizarDocumentoDatabase('lista-usuarios', id, usuario)
@@ -59,7 +64,8 @@ export function ModificarUsuario() {
             nombres,
             email,
             genero,
-            rol
+            rol,
+            fechaNa
         }
 
         await guardarDatabase('lista-usuarios', usuario)
@@ -87,18 +93,28 @@ export function ModificarUsuario() {
                         <label >Correo electrónico</label>
                         <input
                             type="email"
-                            placeholder="Escribe tu correo electronico"
+                            placeholder="Correo electronico Usuario"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
+                            onChange={(e) => setEmail(e.target.value.toLowerCase())} />
                     </div>
 
                     <div className={styleRegProd["form-places"]}>
-                        <label >Género</label>
-                        <input
-                            type="text"
-                            placeholder="Opcional"
+                        <label>Género</label>
+                        <select
                             value={genero}
-                            onChange={(e) => setGenero(e.target.value)} />
+                            onChange={(e) => setGenero(e.target.value.toLowerCase())}
+                        >
+                            <option value="">Sin especificar</option>
+                            <option value="mujer">Mujer</option>
+                            <option value="hombre">Hombre</option>
+                        </select>
+                    </div>
+                    <div className={styleRegProd["form-places"]}>
+                        <label >Fecha Nacimiento</label>
+                        <input
+                            type="date"
+                            value={fechaNa}
+                            onChange={(e) => setFechaNa(e.target.value)} />
                     </div>
                     <div className={styleRegProd["form-places"]}>
                         <label>Rol</label>
@@ -106,9 +122,9 @@ export function ModificarUsuario() {
                             name="Rol"
                             value={rol}
                             onChange={(e) => setRol(e.target.value)}>
-                            <option value="General">General</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Vendedor">Vendedor</option>
+                            <option value="0">General</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Vendedor</option>
                         </select>
                     </div>
 

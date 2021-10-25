@@ -1,11 +1,28 @@
 import { Link } from "react-router-dom";
 import styles from "../../css/Style-Historial.module.css"
 import { useState, useEffect } from "react";
-import { consultarDatabase } from "../../config/firebase"
+import { consultaPorItemDocumentos, consultarDatabase } from "../../config/firebase"
 
 
 export function HistorialProductos() {
     const [listaProductos, setListaProductos] = useState([])
+
+    const [busqueda, setBusqueda] = useState("")
+    const [campoBusqueda, setCampoBusqueda] = useState("descripcion")
+
+  
+
+
+    const handleBusqueda = async (e) => {
+        e.preventDefault()
+        if (!busqueda.trim()) {
+            return
+        } else {
+            const temp = await consultaPorItemDocumentos("lista-servicios", campoBusqueda, "==", busqueda)
+
+            setListaProductos(temp);
+        }
+    }
 
     const cargarProductos = async ()=>{
         const temp = await consultarDatabase("lista-servicios");
@@ -24,7 +41,20 @@ export function HistorialProductos() {
                     <h2>Lista de Servicios</h2>
                 </div>
                 <div className={styles["campo-busqueda"]}>
-                    <input type="text" placeholder="Buscar: id-#, des-texto" />
+                <select
+                        value={campoBusqueda}
+                        onChange={(e) => setCampoBusqueda(e.target.value)}>
+                        <option value="descripcion">Servicio</option>
+                        <option value="estado">Estado</option>
+                    </select>
+                    <button
+                        onClick={(e) => handleBusqueda(e)}>Buscar</button>
+                    <input
+                        type="text"
+                        placeholder="Buscar: Texto en el campo"
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
@@ -32,7 +62,7 @@ export function HistorialProductos() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Descripción</th>
+                            <th>Servicio</th>
                             <th>Valor</th>
                             <th>Estado</th>
                             <th></th>
@@ -42,7 +72,7 @@ export function HistorialProductos() {
                         {
                             listaProductos.map((listaProducto, index) => (
                                 <tr key={index + 1}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{listaProducto["descripcion"]}</td>
                                     <td>{listaProducto.valor}</td>
                                     <td>{listaProducto.estado}</td>
