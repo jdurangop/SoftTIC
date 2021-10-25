@@ -1,59 +1,84 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import { AppRouters } from './components/AppRouters';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';
 import { RegistroUsuario } from './components/usuarios/RegistroUsusario';
 import { PortadaLogin } from './components/PortadaLogin';
+import { SalirUsuario, auth, consultaPorItemDocumentos, guardarDatabase } from './config/firebase';
+import { useEffect } from 'react';
+import { LoadingPage } from "./components/LoadingPage";
 
 
 function App() {
-  const auth = getAuth();
-  const [user, setUser] = useState(auth.currentUser);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false)
 
-
-  const handleSalir = (e) => {
+  const handleSalir = async (e) => {
     e.preventDefault()
-    signOut(auth).then(() => {
-      console.log("Sing Out");
-
-    }).catch((error) => {
-      console.log("No cerró sesión");
-      console.log(error);
-    })
-
+    await SalirUsuario()
   }
 
 
+  useEffect(() => {
 
-  onAuthStateChanged(auth, (usuario) => {
-    if (usuario) {
-      setUser(auth.currentUser);
-      console.log("SI");
-      // return
-    }
-    else {
-      setUser(auth.currentUser)
-      // return
-    }
-  })
+    onAuthStateChanged(auth, async (usuario) => {
+      setLoading(true)
+      if (usuario) {
 
+        const consulta = await consultaPorItemDocumentos("lista-usuarios", "email", "==", usuario.email);
+        if (consulta.length === 0) {
+          const user = {
+            uid: usuario.uid,
+            nombres: usuario.displayName,
+            email: usuario.email,
+            genero: "",
+            fechaNa: "",
+            rol: 0
+          }
+
+          await guardarDatabase('lista-usuarios', user);
+
+
+        }
+
+
+        setUser(usuario);
+
+      }
+      else {
+        setUser(null)
+
+      }
+      setLoading(false)
+    })
+
+  }, [setUser])
 
   return (
     <>
-      <div id="btn-signOut" className={user ? "btn-signOut" : "btn-signOut visibilidad"}>
-        <button
-          onClick={handleSalir}
-        >Cerrar sesión</button>
-      </div>
-      <Router>
-        <Switch>
-          <Route exact path="/" children={user ? <AppRouters User={user} /> : <Redirect to="/p" />} />
-          <Route exact path="/Registro" children={user ? <Redirect to="/" /> : <RegistroUsuario Auth={auth} />} />
-          <Route path="/p" children={user ? <Redirect to="/" /> : <PortadaLogin Auth={auth} />} />
-          <Route exact path="*" children={user ? <Redirect to="/" /> : <Redirect to="/p" />} />
-        </Switch>
-      </Router>
+      {
+        loading
+          ?
+          <LoadingPage />
+          :
+          <div>
+            <div id="btn-signOut" className={user ? "btn-signOut" : "btn-signOut visibilidad"}>
+              <button
+
+                onClick={handleSalir}
+              >Cerrar sesión</button>
+            </div>
+            <Router>
+              <Switch>
+                <Route exact path="/" children={user ? <AppRouters User={user} /> : <Redirect to="/p" />} />
+                <Route exact path="/Registro" children={user ? <Redirect to="/" /> : <RegistroUsuario />} />
+                <Route path="/p" children={user ? <Redirect to="/" /> : <PortadaLogin />} />
+                <Route exact path="*" children={user ? <Redirect to="/" /> : <Redirect to="/p" />} />
+              </Switch>
+            </Router>
+          </div>}
+
     </>
   );
 }

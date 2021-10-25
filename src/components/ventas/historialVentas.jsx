@@ -1,19 +1,50 @@
 import { Link } from "react-router-dom";
 import styles from "../../css/Style-Historial.module.css"
 import { useState, useEffect } from "react";
-import { consultarDatabase } from "../../config/firebase";
+import { consultaPorItemDocumentos, consultarDatabase } from "../../config/firebase";
 
-export function HistorialVentas() {
+export function HistorialVentas({ Rol }) {
     const [listaVentas, setListaVentas] = useState([])
+    const [listaProductos, setListaProductos] = useState({})
 
-    const cargarVentas = async ()=>{
+    const [busqueda, setBusqueda] = useState("")
+    const [campoBusqueda, setCampoBusqueda] = useState("servicio")
+
+  
+
+
+    const handleBusqueda = async (e) => {
+        e.preventDefault()
+        if (!busqueda.trim()) {
+            return
+        } else {
+            const temp = await consultaPorItemDocumentos("lista-ventas", campoBusqueda, "==", busqueda)
+
+            setListaVentas(temp);
+        }
+    }
+
+    const cargarVentas = async () => {
         const temp = await consultarDatabase("lista-ventas");
         setListaVentas(temp);
     }
 
-    useEffect(()=> {
+    const cargarProductos = async () => {
+        const temp = await consultarDatabase("lista-servicios");
+        const tempArreglo = {}
+        temp.map((producto) => {
+            tempArreglo["s-" + producto.id] = producto.descripcion;
+            tempArreglo["v-" + producto.id] = producto.valor;
+            return 0;
+        })
+        setListaProductos(tempArreglo);
+
+    }
+    useEffect(() => {
         cargarVentas()
+        cargarProductos()
     }, [])
+    
 
     return (
         <div>
@@ -22,7 +53,20 @@ export function HistorialVentas() {
                     <h2>Historial de ventas</h2>
                 </div>
                 <div className={styles["campo-busqueda"]}>
-                    <input type="text" placeholder="Buscar: id-#, des-texto" />
+                    <select
+                        value={campoBusqueda}
+                        onChange={(e) => setCampoBusqueda(e.target.value)}>
+                        <option value="servicio">Servicio</option>
+                        <option value="cliente">Cliente</option>
+                    </select>
+                    <button
+                        onClick={(e) => handleBusqueda(e)}>Buscar</button>
+                    <input
+                        type="text"
+                        placeholder="Buscar: Texto en el campo"
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
@@ -30,26 +74,31 @@ export function HistorialVentas() {
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Nombre</th>
-                            <th>Fecha de pago</th>
-                            <th>Descripción</th>
+                            <th>Servicio</th>
                             <th>Valor</th>
+                            <th>Cliente</th>
+                            <th>Fecha Pago</th>
                             <th>Encargado</th>
-                            <th></th>
+                            {Rol !== 1 ? null : <th></th>}
                         </tr>
                     </thead>
                     <tbody>
-                        {listaVentas.map((venta, index) => (
-                            <tr key={index + 1}>
-                                <td>{index + 1}</td>
-                                <td>{venta.nombre}</td>
-                                <td>{venta.fechaPago}</td>
-                                <td>{venta.descripcion}</td>
-                                <td>{venta.valor}</td>
-                                <td>{venta.encargado}</td>
-                                <td><Link className={styles.btnEdit} to={`/sales/${venta.id}`}>Editar</Link></td>
-                            </tr>
-                        ))
+
+                        {
+                            listaVentas.map((venta, index) => (
+
+                                <tr key={index + 1}>
+                                    <td>{index + 1}</td>
+                                    <td>{listaProductos["s-" + venta.servicio]}</td>
+                                    <td>{listaProductos["v-" + venta.valor]}</td>
+                                    <td>{venta.cliente}</td>
+                                    <td>{venta.fechaPago}</td>
+                                    <td>{venta.encargado}</td>
+                                    {Rol !== 1 ? null :
+                                        <td><Link className={styles.btnEdit} to={`/sales/${venta.id}`}>Editar</Link></td>
+                                    }
+                                </tr>
+                            ))
                         }
                     </tbody>
                 </table>

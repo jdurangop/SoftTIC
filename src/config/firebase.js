@@ -2,7 +2,9 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, getRedirectResult, signInWithRedirect } from "firebase/auth";
+import { getAuth, signOut, updateProfile } from 'firebase/auth';
+
 import {
     getFirestore,
     collection,
@@ -13,6 +15,7 @@ import {
     addDoc,
     deleteDoc,
     updateDoc,
+    where
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -28,10 +31,17 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
+export const auth = getAuth();
+
 //Crear usuario con correo y contraseña
-export const crearUsuarioCorreo = async (auth, email, password) => {
+export const crearUsuarioCorreo = async (email, password, nombre) => {
     try {
         const credencialesUsuario = await createUserWithEmailAndPassword(auth, email, password)
+
+        await updateProfile(auth.currentUser, {
+            displayName: nombre
+        })
+
         const user = {
             id: credencialesUsuario.user.uid,
             email: credencialesUsuario.user.email
@@ -39,16 +49,22 @@ export const crearUsuarioCorreo = async (auth, email, password) => {
 
         return user
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         return 0
     }
 }
 
+
+
 const provider = new GoogleAuthProvider();
 
-export const signUsuarioGoogle = async (auth) => {
+
+
+export const signUsuarioGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, provider)
+
+        signInWithRedirect(auth, provider)
+        const result = await getRedirectResult(auth)
         // const credencialesGoogle = GoogleAuthProvider.credentialFromResult(result);
         // const token = credencialesGoogle.accessToken;
 
@@ -67,9 +83,31 @@ export const signUsuarioGoogle = async (auth) => {
 
 }
 
-export const signUsuarioCorreo = async (auth, email, password) => {
+// export const signUsuarioGoogle = async () => {
+//     try {
+//         const result = await signInWithPopup(auth, provider)
+//         // const credencialesGoogle = GoogleAuthProvider.credentialFromResult(result);
+//         // const token = credencialesGoogle.accessToken;
+
+//         return result.user
+//     } catch (error) {
+
+//         // Handle Errors here.
+//         console.log(error.code);
+//         console.log(error.message);
+//         // The email of the user's account used.
+//         console.log(error.email);
+//         // The AuthCredential type that was used.
+//         console.log(GoogleAuthProvider.credentialFromError(error));
+//         return 0;
+//     }
+
+// }
+
+export const signUsuarioCorreo = async (email, password, name) => {
     try {
         const result = await signInWithEmailAndPassword(auth, email, password)
+
         
 
         return result.user
@@ -78,9 +116,18 @@ export const signUsuarioCorreo = async (auth, email, password) => {
         // Handle Errors here.
         console.log(error);
         return 0
-        
+
     }
 
+}
+
+export const SalirUsuario = async () => {
+    await signOut(auth).then(() => {
+        
+
+    }).catch((error) => {
+        console.log(error);
+    })
 }
 
 // base de datos
@@ -99,7 +146,7 @@ export const guardarDatabase = async (nombreDatabase, data) => {
 // Consultar todos los documentos (Coleccion)
 export const consultarDatabase = async (nombreDatabase) => {
     try {
-        
+
         const response = await getDocs(query(collection(database, nombreDatabase)));
         const elementos = response.docs.map((doc) => {
             const document = {
@@ -125,6 +172,25 @@ export const consultarDocumentoDatabase = async (nombreDatabase, id) => {
         return document;
     } catch (error) {
         throw new Error(error.message);
+    }
+};
+
+// consulatar documento por campo
+
+export const consultaPorItemDocumentos = async (nombreDatabase, campo, condition, argumento) => {
+    try {
+        const datos = [];
+        const q = query(collection(database, nombreDatabase), where(campo, condition, argumento));
+        const respuesta = await getDocs(q)
+        respuesta.forEach((doc) => {
+            datos.push({
+                id: doc.id,
+                ...doc.data()});
+        })
+        return datos
+
+    } catch (error) {
+        console.log(error);
     }
 };
 

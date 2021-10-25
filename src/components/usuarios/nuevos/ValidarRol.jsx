@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styleRegProd from "../../css/Style-Registro.module.css"
-import { crearUsuarioCorreo } from '../../config/firebase';
+import { crearUsuarioCorreo, guardarDatabase, consultaPorItemDocumentos } from '../../config/firebase';
 import { validate } from "email-validator";
 
 export function RegistroUsuario() {
-    const [name, setName] = useState("")
+
+    const [nombres, setNombre] = useState('')
     const [email, setEmail] = useState('')
+    const [genero, setGenero] = useState('')
     const [password, setPassword] = useState('')
 
     const history = useHistory()
 
     const handleRegistro = async (e) => {
         e.preventDefault()
-
-        if (!name.trim()){
-            alert("Por favor ingresa un nombre")
+        if (nombres.length === 0) {
+            alert("Debe tener un Nombre");
             return
         }
 
@@ -29,14 +30,38 @@ export function RegistroUsuario() {
             return
         }
 
-        const res = await crearUsuarioCorreo(email.trim(), password, name.trim())
 
-        if(res === 0){
-            alert("Datos de usuario no validos")
+        const consulta = await consultaPorItemDocumentos("lista-usuarios", "email", "==", email);
+        console.log(consulta);
+        if (consulta.length !== 0){
+            alert("Ya existe un usuario con esos datos")
             return
         }
 
-        history.push('/p')
+
+        const usuario = await crearUsuarioCorreo(email, password)
+        
+
+        if (usuario) {
+            const user = {
+                uid: usuario.id,
+                nombres,
+                genero,
+                email: usuario.email,
+                rol: "Cliente",
+                estado: "Pendiente"
+            }
+
+            const res = await guardarDatabase('lista-usuarios', user);
+            console.log(res);
+            console.log(user);
+
+            history.push('/p')
+        }
+
+        
+
+
     }
 
 
@@ -46,14 +71,21 @@ export function RegistroUsuario() {
                 <h2>Registro Usuario</h2>
                 <form id="formReg">
                     <div className={styleRegProd["form-places"]}>
-                        <label>Nombre completo</label>
+                        <label>Nombre(s)</label>
                         <input
                             type="text"
-                            placeholder="Escribe tu nombre completo"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)} />
+                            placeholder="Nombre"
+                            value={nombres}
+                            onChange={(e) => setNombre(e.target.value.toLowerCase())} />
                     </div>
-
+                    <div className={styleRegProd["form-places"]}>
+                        <label>Género</label>
+                        <input
+                            type="text"
+                            placeholder="Opcional"
+                            value={genero}
+                            onChange={(e) => setGenero(e.target.value.toLowerCase())} />
+                    </div>
                     <div className={styleRegProd["form-places"]}>
                         <label>Correo electrónico</label>
                         <input
@@ -73,11 +105,7 @@ export function RegistroUsuario() {
 
 
                     <div className={styleRegProd["btn-externo-registro"]}>
-                        <button
-                            type="submit"
-                            onClick={handleRegistro}
-                            className={styleRegProd["btn-registrarse"]}
-                        >Registrarse</button>
+                        <button type="submit" onClick={handleRegistro} className={styleRegProd["btn-registrarse"]}>Registrarse</button>
                     </div>
 
                 </form>
@@ -88,9 +116,6 @@ export function RegistroUsuario() {
                         className={styleRegProd["btn-cancelar"]}
                         onClick={(e) => {
                             e.preventDefault()
-                            setEmail("")
-                            setName("")
-                            setPassword("")
                             history.push("/")
                         }}
                     >Cancelar</button>

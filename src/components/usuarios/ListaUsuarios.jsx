@@ -2,19 +2,39 @@ import { Link } from "react-router-dom";
 import styles from "../../css/Style-Historial.module.css"
 import { useState, useEffect } from "react";
 import { consultarDatabase } from "../../config/firebase"
+import roles from "../../config/Roles.json"
+import { consultaPorItemDocumentos } from './../../config/firebase';
 
 
 export function ListaUsuarios() {
     const [listaUsuarios, setListaUsuarios] = useState([])
+    const [busqueda, setBusqueda] = useState("")
+    const [campoBusqueda, setCampoBusqueda] = useState("email")
 
-    const cargarUsuarios = async ()=>{
+
+    const cargarUsuarios = async () => {
         const temp = await consultarDatabase("lista-usuarios");
         setListaUsuarios(temp);
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         cargarUsuarios()
     }, [])
+
+    const handleBusqueda = async (e) => {
+        e.preventDefault()
+        if (!busqueda.trim()) {
+            return
+        } else {
+            const temp = await consultaPorItemDocumentos("lista-usuarios", campoBusqueda, "==", busqueda)
+            console.log(temp);
+            console.log(campoBusqueda);
+            console.log(busqueda);
+            // setListaUsuarios(temp)
+            // console.log(listaUsuarios);
+            setListaUsuarios(temp);
+        }
+    }
 
     return (
         <div>
@@ -23,7 +43,22 @@ export function ListaUsuarios() {
                     <h2>Usuarios</h2>
                 </div>
                 <div className={styles["campo-busqueda"]}>
-                    <input type="text" placeholder="Buscar: id-#, des-texto" />
+                    <select
+                        value={campoBusqueda}
+                        onChange={(e) => setCampoBusqueda(e.target.value)}>
+                        <option value="nombres">Nombres</option>
+                        <option value="email">Correo</option>
+                    </select>
+                    <button
+                        onClick={(e) => handleBusqueda(e)}>Buscar</button>
+                    <input
+                        type="text"
+                        id="campoBusqueda"
+                        placeholder="Buscar: Texto en el campo"
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
+
                 </div>
             </div>
             <div className={`${styles["tableframe"]} ${styles["table-position"]}`}>
@@ -35,7 +70,7 @@ export function ListaUsuarios() {
                             <th>Correo</th>
                             <th>Género</th>
                             <th>Rol</th>
-                            <th>Estado</th>
+                            <th>Fecha Nacimiento</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -45,11 +80,11 @@ export function ListaUsuarios() {
 
                                 <tr key={index + 1}>
                                     <td>{index + 1}</td>
-                                    <td>{usuario.nombre}</td>
+                                    <td>{usuario.nombres}</td>
                                     <td>{usuario.email}</td>
                                     <td>{usuario.genero}</td>
-                                    <td>{usuario.rol}</td>
-                                    <td>{usuario.estado}</td>
+                                    <td>{roles[usuario.rol]}</td>
+                                    <td>{usuario.fechaNa}</td>
                                     <td><Link className={styles.btnEdit} to={`/users/${usuario.id}`}>Editar</Link></td>
                                 </tr>
 
@@ -58,9 +93,9 @@ export function ListaUsuarios() {
                     </tbody>
                 </table>
             </div>
-            <div className={styles["btns"]}>
+            {/* <div className={styles["btns"]}>
                 <Link className={styles["btn"]} to="/users/regUsuario">Nuevo Usuario</Link>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -72,11 +72,10 @@ export function RegistroProducto() {
             </h2>
             <form>
                 <div className={styleRegProd["form-places"]}>
-                    <label >Descripción</label>
+                    <label >Nombre servicio</label>
                     <input
                         type="text"
-                        id="description"
-                        placeholder="Descripción del producto"
+                        placeholder="Descripción del servicio"
                         value={descripcion}
                         onChange={(e) => setDescripcion(e.target.value)} />
                 </div>
@@ -84,8 +83,7 @@ export function RegistroProducto() {
                     <label >Valor</label>
                     <input
                         type="number"
-                        id="price"
-                        placeholder="Valor del producto"
+                        placeholder="Valor del servicio"
                         value={valor}
                         onChange={(e) => setValor(e.target.value)} />
                 </div>
@@ -94,7 +92,6 @@ export function RegistroProducto() {
                     <label >Estado</label>
                     <input
                         type="text"
-                        id="status"
                         placeholder="Estado del producto"
                         value={estado}
                         onChange={(e) => setEstado(e.target.value)} />
@@ -107,6 +104,14 @@ export function RegistroProducto() {
                         onClick={id === 'crearProducto' ? handleGuardarProducto : handleActualizarProducto}
                     >{id === "crearProducto" ? "Crear" : "Modificar"} Servicio</button>
                 </div>
+
+                <div className={styleRegProd["btn-externo-registro"]}>
+                        <button
+                            type="submit"
+                            className={styleRegProd["btn-cancelar"]}
+                            onClick={() => { history.push("/products") }}
+                        >Cancelar</button>
+                    </div>
 
             </form>
         </div>
